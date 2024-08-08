@@ -15,14 +15,24 @@ fn main() {
         let mut choice = String::new();
         io::stdin().read_line(&mut choice).expect("Whoops!");
         choice = choice.to_lowercase();
-
-        let (num1, num2) = input_constructor();
         // match user choice against available operation patterns
         match choice.trim() {
-            "1" => println!("{}", operation_pretty("sum", &num1, &num2)),
-            "2" => println!("{}", operation_pretty("sub", &num1, &num2)),
-            "3" => println!("{}", operation_pretty("mult", &num1, &num2)),
-            "4" => println!("{}", operation_pretty("div", &num1, &num2)),
+            "1" => {
+                let (num1, num2) = input_constructor();
+                println!("{}", operation_pretty("sum", &num1, &num2));
+            }
+            "2" => {
+                let (num1, num2) = input_constructor();
+                println!("{}", operation_pretty("sub", &num1, &num2));
+            }
+            "3" => {
+                let (num1, num2) = input_constructor();
+                println!("{}", operation_pretty("mult", &num1, &num2));
+            }
+            "4" => {
+                let (num1, num2) = input_constructor();
+                println!("{}", operation_pretty("div", &num1, &num2));
+            }
             "h" => print_help(),
             "" => (),
             "e" => exit(0),
@@ -33,12 +43,12 @@ fn main() {
 
 fn print_help() {
     println!(
-        "(1) Sum\n
-        (2) Substraction\n
-        (3) Multiplication\n
-        (4) Division\n
-        (h) Help\n
-        (e) Exit"
+        "(1) Sum
+(2) Substraction
+(3) Multiplication
+(4) Division
+(h) Help
+(e) Exit"
     );
 }
 
@@ -73,7 +83,7 @@ fn operation(op: &str, num1: &str, num2: &str) -> isize {
     }
 }
 
-fn operation_pretty(op: &str, num1: &String, num2: &String) -> String {
+fn operation_pretty(op: &str, num1: &str, num2: &str) -> String {
     let result = operation(op, num1, num2);
     let operator = match op {
         "sum" => "+",
@@ -85,6 +95,9 @@ fn operation_pretty(op: &str, num1: &String, num2: &String) -> String {
     // Return formatted string
     format!(
         "The Result for {} {} {} is {}",
-        num1, operator, num2, result
+        num1.trim(),
+        operator,
+        num2.trim(),
+        result
     )
 }
